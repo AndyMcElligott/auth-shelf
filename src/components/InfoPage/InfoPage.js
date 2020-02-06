@@ -9,16 +9,40 @@ import { connect } from 'react-redux'
 class InfoPage extends Component {
 
   componentDidMount() {
-    this.props.dispatch({type: 'FETCH_BOOKS'})
+    this.props.dispatch({ type: 'FETCH_BOOKS' })
   }
 
-  render () {
+  render() {
+    let booksForDom = [];
+    let gifsData = this.props.reduxStore.infoReducer
+    console.log(gifsData)
+    gifsForDom = gifsData.map((gif) => {
+      console.log(gif.images.original.url)
+      return (
+        // <GiftListItem gif={gif} />
+        <li>
+          <img src={gif.images.original.url} />
+          <button onClick={(event) => this.favorite(event, gif.images.original.url)}>Favorite!</button>
+        </li>
+      )
+    })
+
+    return (
+      <ul>
+        {gifsForDom}
+      </ul>
+    )
+
+
+
+
+
     return (
       <div>
-      <p>
-        Shelf Page
+        <p>
+          Shelf Page
       </p>
-    </div>
+      </div>
     )
   }
 };
