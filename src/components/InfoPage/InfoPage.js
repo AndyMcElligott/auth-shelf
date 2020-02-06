@@ -13,6 +13,7 @@ class InfoPage extends Component {
   }
   deleteBook = (book) => {
     console.log('Ready to delete this book', book)
+    console.log(this.props.reduxStore.user)
     this.props.dispatch({ 
       type: 'DELETE_BOOK', 
       payload: book
@@ -30,7 +31,10 @@ class InfoPage extends Component {
               <div>
                 <p>{book.description}</p>
                 {/* <img src={book.image_url} /> */}
-                <button onClick={ () => this.deleteBook(book.id)}>DELETE BOOK</button>
+                {this.props.reduxStore.user.id === book.user_id ? 
+                <button onClick={ (book) => this.deleteBook(book)}>DELETE BOOK</button> :
+                <p></p>
+                }
               </div>
             </li>
           )}
