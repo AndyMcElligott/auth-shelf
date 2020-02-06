@@ -3,6 +3,7 @@ import { put, takeEvery, } from 'redux-saga/effects';
 
 function* infoSaga() {
     yield takeEvery('FETCH_BOOKS', fetchBooks);
+    yield takeEvery('POST_BOOKS', postBooks)
 }
 
 function* postBooks(action) {
