@@ -1,3 +1,4 @@
+
 const infoReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_BOOKS':
@@ -10,3 +11,4 @@ const infoReducer = (state = [], action) => {
   // user will be on the redux state at:
   // state.user
   export default infoReducer;
+
