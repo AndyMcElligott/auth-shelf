@@ -13,7 +13,13 @@ class InfoPage extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_BOOKS' })
   }
-
+  deleteBook = (book) => {
+    console.log('Ready to delete this book', book)
+    this.props.dispatch({ 
+      type: 'DELETE_BOOK', 
+      payload: book
+  })
+  }
   render() {
     return (
       <div>
@@ -21,16 +27,17 @@ class InfoPage extends Component {
           Shelf Page
       </p>
       <BookForm />
-        {/* <ul>
+        <ul>
           {this.props.reduxStore.infoReducer.map(book =>
             <li key={book.id}>
               <div>
                 <p>{book.description}</p>
-                {/* <img src={book.image_url} /> */}
-              {/* </div> */}
-        {/* //     </li> */}
-        {/* //   )} */}
-        {/* // </ul> */} */}
+                <img src={book.image_url} />
+                <button onClick={ () => this.deleteBook(book.id)}>DELETE BOOK</button>
+              </div>
+            </li>
+          )}
+        </ul>
       </div>
     )
   }
