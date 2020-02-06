@@ -8,7 +8,7 @@ function* infoSaga() {
 function* fetchBooks() {
     try {
         let response = yield axios.get('/api/shelf')
-        console.log(response.data);
+        console.log(response.data)
         yield put ({ type: 'SET_BOOKS', payload: response.data })
 
     }
