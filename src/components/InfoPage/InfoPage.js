@@ -13,38 +13,28 @@ class InfoPage extends Component {
   }
 
   render() {
-    let booksForDom = [];
-    let gifsData = this.props.reduxStore.infoReducer
-    console.log(gifsData)
-    gifsForDom = gifsData.map((gif) => {
-      console.log(gif.images.original.url)
-      return (
-        // <GiftListItem gif={gif} />
-        <li>
-          <img src={gif.images.original.url} />
-          <button onClick={(event) => this.favorite(event, gif.images.original.url)}>Favorite!</button>
-        </li>
-      )
-    })
-
-    return (
-      <ul>
-        {gifsForDom}
-      </ul>
-    )
-
-
-
-
-
     return (
       <div>
         <p>
           Shelf Page
       </p>
+        <ul>
+          {this.props.reduxStore.infoReducer.map(book =>
+            <li key={book.id}>
+              <div>
+                <p>{book.description}</p>
+                {/* <img src={book.image_url} /> */}
+              </div>
+            </li>
+          )}
+        </ul>
       </div>
     )
   }
 };
 
-export default connect()(InfoPage);
+const mapReduxStateToProps = (reduxStore) => ({
+  reduxStore
+})
+
+export default connect(mapReduxStateToProps)(InfoPage);
