@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import BookForm from '../BookForm/BookForm'
+
 
 // This is one of our simplest components
 // It doesn't have local state, so it can be a function component.
@@ -24,12 +26,14 @@ class InfoPage extends Component {
         <p>
           Shelf Page
       </p>
-        <ul>
+      <BookForm />
+        {/* <ul>
           {this.props.reduxStore.infoReducer.map(book =>
             <li key={book.id}>
               <div>
                 <p>{book.description}</p>
                 {/* <img src={book.image_url} /> */}
+
                 <button onClick={ () => this.deleteBook(book.id)}>DELETE BOOK</button>
               </div>
             </li>
