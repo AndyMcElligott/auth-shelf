@@ -1,13 +1,14 @@
-const infoReducer = (state = {}, action) => {
+
+const infoReducer = (state = [], action) => {
     switch (action.type) {
-        case 'SET_INFO':
-          return action.payload;
-        default:
-          return state;
-      }
-}
-
-
-
-export default infoReducer;
+      case 'SET_BOOKS':
+        return action.payload;
+      default:
+        return state;
+    }
+  };
   
+  // user will be on the redux state at:
+  // state.user
+  export default infoReducer;
+
