@@ -1,6 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 /**
  * Get all of the items on the shelf
@@ -17,7 +18,6 @@ router.get('/', (req, res) => {
             res.sendStatus(500);
         })
 });
-
 
 /**
  * Add an item for the logged in user to the shelf
@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
 /**
  * Delete an item if it's something the logged in user added
  */
-router.delete('/:id/:user_id', (req, res) => {
+router.delete('/:id/:user_id', rejectUnauthenticated, (req, res) => {
     console.log(req.user.id)
     const id = req.params.id
     const user_id = req.params.user_id
