@@ -8,6 +8,7 @@ function* deleteSaga() {
 
 function* deleteBooks(action) {
         try {
+            console.log(action.payload)
             let id = action.payload.id
             let response = yield axios.delete(`/api/shelf/${id}`);
             yield put({ type: 'FETCH_BOOKS' })
