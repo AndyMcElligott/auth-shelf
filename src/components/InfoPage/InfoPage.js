@@ -13,13 +13,7 @@ class InfoPage extends Component {
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_BOOKS' })
   }
-  deleteBook = (book) => {
-    console.log('Ready to delete this book', book)
-    this.props.dispatch({ 
-      type: 'DELETE_BOOK', 
-      payload: book
-  })
-  }
+  
   render() {
     return (
       <div>
@@ -33,8 +27,13 @@ class InfoPage extends Component {
               <div>
                 <p>{book.description}</p>
                 {/* <img src={book.image_url} /> */}
-
-                <button onClick={ () => this.deleteBook(book.id)}>DELETE BOOK</button>
+                {this.props.reduxStore.user.id === book.user_id ? 
+                <button onClick={() => this.props.dispatch(
+                  { type: 'DELETE_BOOK',
+                    payload: book
+                  })}>DELETE BOOK</button> :
+                <p></p>
+                }
               </div>
             </li>
           )}

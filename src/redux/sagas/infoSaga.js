@@ -24,9 +24,4 @@ function* fetchBooks() {
 }
 
 
-
-
-
-
-
 export default infoSaga
