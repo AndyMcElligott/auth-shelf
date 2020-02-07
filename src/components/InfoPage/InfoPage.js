@@ -27,7 +27,7 @@ class InfoPage extends Component {
           Shelf Page
       </p>
       <BookForm />
-        <ul>
+        {/* <ul>
           {this.props.reduxStore.infoReducer.map(book =>
             <li key={book.id}>
               <div>
@@ -37,7 +37,7 @@ class InfoPage extends Component {
               </div>
             </li>
           )}
-        </ul>
+        </ul> */}
       </div>
     )
   }

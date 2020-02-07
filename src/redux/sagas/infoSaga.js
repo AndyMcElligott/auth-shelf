@@ -7,15 +7,16 @@ function* infoSaga() {
 }
 
 function* postBooks(action) {
- let response = yield axios.post(`/api/shelf`, {url: action.payload})
- yield put({type: 'SET_BOOKS'})
+    console.log('in postBook saga', action.payload)
+    let response = yield axios.post(`/api/shelf`, action.payload)
+    yield put({ type: 'FETCH_BOOKS', })
 }
 
 function* fetchBooks() {
     try {
         let response = yield axios.get('/api/shelf')
         console.log(response.data)
-        yield put ({ type: 'SET_BOOKS', payload: response.data })
+        yield put({ type: 'SET_BOOKS', payload: response.data })
 
     }
     catch (error) {

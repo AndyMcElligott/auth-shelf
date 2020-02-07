@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
+const mapStateToProps = reduxState => ({
+    reduxState
+})
+
 class BookForm extends Component {
 
     state = {
@@ -14,6 +18,7 @@ class BookForm extends Component {
         console.log(event.target.value)
         this.setState({
           newBook: {
+              ...this.state.newBook,
               [propertyName]: event.target.value
           }  
         })
@@ -22,7 +27,7 @@ class BookForm extends Component {
     handleClick = (event) => {
         event.preventDefault()
         this.props.dispatch({
-            type: 'POST_BOOK',
+            type: 'POST_BOOKS',
             payload: this.state.newBook
         })
     }
@@ -41,4 +46,4 @@ class BookForm extends Component {
     }
 }
 
-export default connect()(BookForm)
+export default connect(mapStateToProps)(BookForm)
