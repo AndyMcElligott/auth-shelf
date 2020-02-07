@@ -1,7 +1,7 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
-
+const {rejectUnauthenticated} = require('../modules/authentication-middleware')
 /**
  * Get all of the items on the shelf
  */
@@ -22,17 +22,20 @@ router.get('/', (req, res) => {
 /**
  * Add an item for the logged in user to the shelf
  */
-router.post('/', (req, res) => {
+router.post('/', rejectUnauthenticated, (req, res) => {
+    console.log('in post router')
     const newItem = req.body;
+    console.log(newItem)
     const queryText = `INSERT INTO "item" ("description", "image_url")
     VALUES ($1, $2);`;
     const queryValues = [
         newItem.description,
-        newItem.imageUrl
+        newItem.image_url
     ];
     pool.query(queryText, queryValues)
     .then(()=> {
         res.sendStatus(201);
+        console.log(queryValues)
     }).catch((err) => {
         console.log('Error in router.post on shelf router', err);
         res.sendStatus(500);
@@ -44,7 +47,15 @@ router.post('/', (req, res) => {
  * Delete an item if it's something the logged in user added
  */
 router.delete('/:id', (req, res) => {
-
+    const id = req.params.id
+    console.log('in delete route', id)
+    const queryText = 'DELETE FROM "item" WHERE "id" = $1'
+    pool.query(queryText, [id])
+    .then(() => {res.sendStatus(200)})
+    .catch((err) => {
+        console.log(err)
+        res.sendStatus(500)
+    })
 });
 
 
