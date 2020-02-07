@@ -47,6 +47,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
  * Delete an item if it's something the logged in user added
  */
 router.delete('/:id', (req, res) => {
+    console.log(req.params)
     const id = req.params.id
     console.log('in delete route', id)
     const queryText = 'DELETE FROM "item" WHERE "id" = $1'
