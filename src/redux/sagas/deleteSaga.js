@@ -10,7 +10,8 @@ function* deleteBooks(action) {
         try {
             console.log(action.payload)
             let id = action.payload.id
-            let response = yield axios.delete(`/api/shelf/${id}`);
+            let user_id= action.payload.user_id
+            let response = yield axios.delete(`/api/shelf/${id}/${user_id}`);
             yield put({ type: 'FETCH_BOOKS' })
             console.log(response.data);
         }
