@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-const mapStateToProps = reduxState => ({
-    reduxState
-})
-
 class BookForm extends Component {
 
     state = {
         newBook: {
             description: '',
             image_url: '',
+            user_id: this.props.reduxStore.user.id
         }
     }
 
     handleChangeFor = (propertyName, event) => {
-        console.log(event.target.value)
+        console.log(event.target.value, this.props.reduxStore.user.id)
         this.setState({
           newBook: {
               ...this.state.newBook,
@@ -46,4 +43,9 @@ class BookForm extends Component {
     }
 }
 
-export default connect(mapStateToProps)(BookForm)
+const mapReduxStateToProps = (reduxStore) => ({
+    reduxStore
+  })
+  
+
+export default connect(mapReduxStateToProps)(BookForm)

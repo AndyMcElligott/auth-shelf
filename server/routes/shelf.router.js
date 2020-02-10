@@ -26,11 +26,12 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     console.log('in post router')
     const newItem = req.body;
     console.log(newItem)
-    const queryText = `INSERT INTO "item" ("description", "image_url")
-    VALUES ($1, $2);`;
+    const queryText = `INSERT INTO "item" ("description", "image_url", "user_id")
+    VALUES ($1, $2, $3);`;
     const queryValues = [
         newItem.description,
-        newItem.image_url
+        newItem.image_url,
+        newItem.user_id,
     ];
     pool.query(queryText, queryValues)
     .then(()=> {
